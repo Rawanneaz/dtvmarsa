@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'scan.dart';
+import 'package:dtv_mobile/screens/scan.dart';
+import 'package:dtv_mobile/screens/main_menu.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,16 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
 
-    // Simulate network delay
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         _isLoading = false;
       });
 
-      // Hard-coded credentials
       if (_usernameController.text == 'admin' && _passwordController.text == '123456789') {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const QRScannerScreen()),
+          MaterialPageRoute(builder: (context) => const MainMenuScreen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -40,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +52,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 Image.asset(
                   'assets/logo.png',
                   height: 120,
-                  // If you don't have the logo asset, replace with a placeholder:
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       height: 120,
@@ -72,10 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                 ),
-
                 const SizedBox(height: 48),
-
-                // Login form
                 TextField(
                   controller: _usernameController,
                   decoration: const InputDecoration(
@@ -84,9 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     border: OutlineInputBorder(),
                   ),
                 ),
-
                 const SizedBox(height: 16),
-
                 TextField(
                   controller: _passwordController,
                   obscureText: !_isPasswordVisible,
@@ -106,10 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 32),
-
-                // Login button
                 SizedBox(
                   width: double.infinity,
                   height: 50,
